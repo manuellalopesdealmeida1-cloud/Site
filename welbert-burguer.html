@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Welbert Burguer</title>
+<meta name="description" content="Welbert Burguer: hambúrguer artesanal feito na chapa, na hora. Veja o cardápio e diga o que podemos melhorar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ketchup:#D62E1F; --mustard:#FFC20E; --bun:#E8A24A; --char:#2B1A12; --paper:#FFF3D1;
+  --bg:#FFF3D1; --text:#2B1A12; --muted:#6B4F3F; --surface:#FFFAEB; --line:#2B1A12; --shadow:#2B1A12;
+  --hero-bg:#D62E1F; --hero-text:#FFF3D1;
+  --btn-bg:#D62E1F; --btn-text:#FFF3D1;
+  --footer-bg:#2B1A12; --footer-text:#FFF3D1;
+  --focus:#1D4ED8;
+  --display:"Bowlby One","Arial Black",Impact,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1F130D; --text:#FFF1D0; --muted:#D9BFA3; --surface:#2C1B12; --line:#FFF1D0; --shadow:#0B0605;
+    --hero-bg:#B3241A; --btn-bg:#FFC20E; --btn-text:#2B1A12;
+    --footer-bg:#140B07; --focus:#FFC20E;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1F130D; --text:#FFF1D0; --muted:#D9BFA3; --surface:#2C1B12; --line:#FFF1D0; --shadow:#0B0605;
+  --hero-bg:#B3241A; --btn-bg:#FFC20E; --btn-text:#2B1A12;
+  --footer-bg:#140B07; --focus:#FFC20E;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--hero-bg);scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);font-size:1.0625rem;line-height:1.55;-webkit-text-size-adjust:100%}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.hero :focus-visible{outline-color:#fff}
+.foot :focus-visible{outline-color:var(--mustard)}
+.wrap{max-width:1120px;margin:0 auto}
+h1,h2,h3{margin:0}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,5.4vw,3.25rem);line-height:1.02;letter-spacing:-.005em}
+.sub{margin:14px 0 0;color:var(--muted);max-width:52ch}
+
+/* Botões */
+.btn{display:inline-block;font:700 1rem/1 var(--body);padding:16px 24px;border:2px solid var(--line);border-radius:999px;background:transparent;color:var(--text);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--shadow);transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--shadow)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow)}
+.btn-primary{background:var(--btn-bg);color:var(--btn-text)}
+.hero .btn-mustard{background:var(--mustard);color:var(--char);border-color:var(--char);box-shadow:4px 4px 0 var(--char)}
+.hero .btn-mustard:hover{box-shadow:6px 6px 0 var(--char)}
+.hero .btn-mustard:active{box-shadow:1px 1px 0 var(--char)}
+.hero .btn-ghost{background:transparent;color:var(--hero-text);border-color:var(--hero-text);box-shadow:none}
+.hero .btn-ghost:hover{background:rgba(255,243,209,.12);transform:none;box-shadow:none}
+
+/* Hero */
+.hero{background:var(--hero-bg);color:var(--hero-text)}
+.top{max-width:1120px;margin:0 auto;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font-family:var(--display);font-size:1.25rem;color:var(--mustard);text-decoration:none;text-shadow:2px 2px 0 var(--char)}
+.top nav{display:flex;gap:26px}
+.top nav a{font-weight:700;text-decoration:none;color:var(--hero-text);padding:6px 0;border-bottom:2px solid transparent}
+.top nav a:hover{border-bottom-color:var(--mustard)}
+.hero-inner{max-width:1120px;margin:0 auto;padding:28px 24px 76px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,11vw,6.75rem);line-height:.92;letter-spacing:-.01em;color:var(--mustard);text-shadow:4px 4px 0 var(--char);margin-bottom:24px}
+.lead{font-size:1.25rem;line-height:1.45;max-width:30ch;margin:0 0 30px}
+.cta{display:flex;flex-wrap:wrap;gap:14px}
+.hero-note{margin:26px 0 0;font-size:.98rem;opacity:.92}
+.art-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.art{width:min(100%,440px);background:none;border:0;padding:0;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent}
+.art svg{display:block;width:100%;height:auto;overflow:visible}
+.layer{transition:transform .55s cubic-bezier(.34,1.5,.5,1);animation:drop .9s cubic-bezier(.3,1.3,.5,1) backwards;animation-delay:var(--d,0s)}
+.art:hover .layer,.art.open .layer{transform:translateY(var(--o,0px))}
+@keyframes drop{from{transform:translateY(-330px);opacity:0}}
+.hint{font-size:.95rem;opacity:.9;text-align:center}
+.drip{height:20px;background:radial-gradient(circle at 20px 0,var(--hero-bg) 19px,transparent 20.5px) 0 0/40px 20px repeat-x}
+
+/* Cardápio */
+.menu{padding:56px 24px 88px}
+.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0 40px}
+.tab{font:700 1rem/1 var(--body);padding:13px 20px;border:2px solid var(--line);border-radius:999px;background:transparent;color:var(--text);cursor:pointer}
+.tab:hover{background:var(--surface)}
+.tab[aria-selected="true"]{background:var(--text);color:var(--bg)}
+.items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 60px}
+.row{display:flex;align-items:baseline;gap:10px}
+.row h3{font:800 1.2rem/1.2 var(--body)}
+.leader{flex:1;min-width:16px;border-bottom:2px dotted var(--muted);transform:translateY(-4px)}
+.price{font-family:var(--display);font-size:1.05rem;white-space:nowrap}
+.item p{margin:7px 0 0;color:var(--muted);max-width:46ch}
+.menu-note{margin:44px 0 0;color:var(--muted)}
+
+/* Sobre */
+.about{background:var(--mustard);color:var(--char);border-top:4px solid var(--char);border-bottom:4px solid var(--char);padding:80px 24px}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.about h2{max-width:11ch}
+.about-list{display:grid;gap:26px}
+.about-list h3{font:800 1.3rem/1.2 var(--body);margin-bottom:6px}
+.about-list p{margin:0;max-width:44ch}
+
+/* Feedback */
+.fb{padding:88px 24px 96px}
+.fb .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.fb-intro p{margin:18px 0 0;max-width:36ch;font-size:1.15rem}
+.fb-intro .fine{font-size:1rem;color:var(--muted)}
+.fb-card{background:var(--surface);border:3px solid var(--line);border-radius:26px;padding:30px;box-shadow:8px 8px 0 var(--shadow)}
+.field{border:0;padding:0;margin:0 0 26px;min-width:0}
+.field legend,.field>label{font-weight:800;font-size:1.1rem;padding:0;margin-bottom:12px;display:block}
+.opt{font-weight:500;color:var(--muted);font-size:.95rem;margin-left:6px}
+.rate{display:flex;gap:6px;flex-wrap:wrap}
+.star{background:none;border:0;padding:4px;cursor:pointer;line-height:0;border-radius:10px;-webkit-tap-highlight-color:transparent}
+.star svg{width:46px;height:42px;display:block;transition:transform .15s ease}
+.star:hover svg{transform:scale(1.08)}
+.star .t,.star .b,.star .p{fill:transparent;stroke:var(--line);stroke-width:2.2;stroke-linejoin:round;transition:fill .15s ease}
+.star.on .t,.star.on .b{fill:var(--bun)}
+.star.on .p{fill:#5A3222}
+.rate-label{margin:8px 0 0;color:var(--muted);min-height:1.5em}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.chip span{display:inline-block;padding:10px 16px;border:2px solid var(--line);border-radius:999px;font-weight:600;background:transparent;pointer-events:none}
+.chip input:checked+span{background:var(--mustard);color:var(--char);border-color:var(--char)}
+.chip input:focus-visible+span{outline:3px solid var(--focus);outline-offset:3px}
+.fb-card textarea,.fb-card input[type="text"]{width:100%;font:inherit;font-size:1rem;padding:13px 15px;border:2px solid var(--line);border-radius:14px;background:var(--bg);color:var(--text)}
+.fb-card textarea{resize:vertical;min-height:120px}
+.fb-card ::placeholder{color:var(--muted);opacity:.85}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.two .field{margin-bottom:0}
+.err{margin:18px 0 0;padding:12px 14px;border:2px solid var(--ketchup);border-radius:12px;font-weight:600;background:var(--surface)}
+.submit-row{margin-top:26px}
+.done h3{font-family:var(--display);font-weight:400;font-size:clamp(1.7rem,4.4vw,2.3rem);line-height:1.05;margin-bottom:12px}
+.done p{margin:0 0 24px;max-width:38ch}
+.done-actions{display:flex;flex-wrap:wrap;gap:14px}
+.done:focus{outline:none}
+
+/* Rodapé */
+.foot{background:var(--footer-bg);color:var(--footer-text);padding:60px 24px calc(28px + env(safe-area-inset-bottom,0px));margin-bottom:calc(-1 * env(safe-area-inset-bottom,0px))}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:36px}
+.foot-logo{font-family:var(--display);font-size:1.5rem;color:var(--mustard);margin:0 0 10px}
+.foot h3{font:800 1.05rem/1.2 var(--body);margin-bottom:10px}
+.foot p{margin:0 0 12px;opacity:.92}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none;border-bottom:1px solid rgba(255,243,209,.4)}
+.foot a:hover{border-bottom-color:var(--mustard)}
+.foot .btn{border-color:var(--footer-text);color:var(--char);background:var(--mustard);box-shadow:none;margin-top:6px}
+.foot .btn:hover{transform:none;box-shadow:none;filter:brightness(1.05)}
+.copy{max-width:1120px;margin:44px auto 0;padding-top:20px;border-top:1px solid rgba(255,243,209,.25);font-size:.95rem;opacity:.8}
+
+/* Responsivo */
+@media (max-width:860px){
+  .hero-inner{grid-template-columns:1fr;gap:34px;padding-bottom:60px}
+  .art{width:min(84%,400px)}
+  .items{grid-template-columns:1fr;gap:26px}
+  .about .wrap,.fb .wrap{grid-template-columns:1fr;gap:34px}
+  .about h2{max-width:none}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){
+  .top nav{gap:18px}
+  .top nav .hide-sm{display:none}
+  .logo{font-size:1.1rem}
+  .menu{padding-top:44px}
+  .fb-card{padding:22px 18px;border-radius:22px;box-shadow:6px 6px 0 var(--shadow)}
+  .two{grid-template-columns:1fr;gap:26px}
+  .star svg{width:40px;height:37px}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .layer{animation:none;transition:none}
+  .btn,.star svg{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="top">
+    <a class="logo" href="#">Welbert Burguer</a>
+    <nav aria-label="Principal">
+      <a href="#cardapio">Cardápio</a>
+      <a class="hide-sm" href="#sobre">Sobre</a>
+      <a href="#feedback">Feedback</a>
+    </nav>
+  </div>
+  <div class="hero-inner">
+    <div>
+      <h1>Welbert<br>Burguer</h1>
+      <p class="lead">Hambúrguer artesanal feito na chapa, na hora. Pão macio, carne suculenta e molho da casa.</p>
+      <div class="cta">
+        <a class="btn btn-mustard" href="#cardapio">Ver cardápio</a>
+        <a class="btn btn-ghost" href="#feedback">Deixar feedback</a>
+      </div>
+      <p class="hero-note">Delivery e retirada no balcão. Terça a domingo, das 18h às 23h.</p>
+    </div>
+    <div class="art-wrap">
+      <button class="art" id="art" type="button" aria-pressed="false" aria-label="Abrir e fechar as camadas do hambúrguer">
+        <svg viewBox="0 0 400 440" aria-hidden="true" focusable="false">
+          <circle cx="200" cy="222" r="200" fill="#FFF3D1" stroke="#2B1A12" stroke-width="4"/>
+          <g transform="translate(0,34)">
+            <!-- pão de baixo -->
+            <g class="layer" style="--o:44px;--d:0s">
+              <path d="M62 300 H338 Q338 348 296 354 H104 Q62 348 62 300 Z" fill="#E8A24A" stroke="#2B1A12" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M96 318 H150" stroke="#F6C37A" stroke-width="6" stroke-linecap="round"/>
+            </g>
+            <!-- carne -->
+            <g class="layer" style="--o:24px;--d:.12s">
+              <rect x="48" y="252" width="304" height="50" rx="25" fill="#5A3222" stroke="#2B1A12" stroke-width="4"/>
+              <path d="M92 268 h40 M170 284 h52 M254 266 h44" stroke="#7D4A34" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <!-- queijo -->
+            <g class="layer" style="--o:6px;--d:.24s">
+              <path d="M52 232 H348 V250 H306 L290 282 L272 250 H120 L104 272 L88 250 H52 Z" fill="#FFD23F" stroke="#2B1A12" stroke-width="4" stroke-linejoin="round"/>
+            </g>
+            <!-- tomate -->
+            <g class="layer" style="--o:-14px;--d:.36s">
+              <rect x="66" y="204" width="268" height="30" rx="15" fill="#D9382A" stroke="#2B1A12" stroke-width="4"/>
+              <path d="M92 216 h58" stroke="#F0705F" stroke-width="5" stroke-linecap="round"/>
+            </g>
+            <!-- alface -->
+            <g class="layer" style="--o:-34px;--d:.48s">
+              <path d="M44 190 q18.75 -18 37.5 0 t37.5 0 t37.5 0 t37.5 0 t37.5 0 t37.5 0 t37.5 0 t37.5 0 V206 H44 Z" fill="#6E9A2F" stroke="#2B1A12" stroke-width="4" stroke-linejoin="round"/>
+            </g>
+            <!-- pão de cima -->
+            <g class="layer" style="--o:-56px;--d:.6s">
+              <path d="M58 164 C58 80 122 26 200 26 C278 26 342 80 342 164 Q342 178 328 178 H72 Q58 178 58 164 Z" fill="#E8A24A" stroke="#2B1A12" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M96 112 C110 74 148 52 186 48" stroke="#F6C37A" stroke-width="10" fill="none" stroke-linecap="round"/>
+              <g fill="#FFF3D1">
+                <ellipse cx="150" cy="84" rx="9" ry="5" transform="rotate(-20 150 84)"/>
+                <ellipse cx="204" cy="66" rx="9" ry="5" transform="rotate(8 204 66)"/>
+                <ellipse cx="254" cy="88" rx="9" ry="5" transform="rotate(24 254 88)"/>
+                <ellipse cx="176" cy="120" rx="9" ry="5" transform="rotate(14 176 120)"/>
+                <ellipse cx="234" cy="124" rx="9" ry="5" transform="rotate(-14 234 124)"/>
+                <ellipse cx="126" cy="138" rx="9" ry="5" transform="rotate(-28 126 138)"/>
+                <ellipse cx="276" cy="146" rx="9" ry="5" transform="rotate(30 276 146)"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </button>
+      <span class="hint">Passe o mouse ou toque para abrir o hambúrguer</span>
+    </div>
+  </div>
+</header>
+
+<div class="drip" aria-hidden="true"></div>
+
+<main>
+  <section id="cardapio" class="menu" aria-labelledby="t-cardapio">
+    <div class="wrap">
+      <h2 id="t-cardapio">Cardápio</h2>
+      <p class="sub">Tudo sai da chapa na hora. Escolha uma categoria para ver os itens.</p>
+      <div class="tabs" id="tabs" role="tablist" aria-label="Categorias do cardápio"></div>
+      <div class="items" id="items" role="tabpanel" aria-live="polite"></div>
+      <p class="menu-note">Tem alergia ou restrição alimentar? Avise no momento do pedido.</p>
+    </div>
+  </section>
+
+  <section id="sobre" class="about" aria-labelledby="t-sobre">
+    <div class="wrap">
+      <h2 id="t-sobre">Feito na chapa, na hora do pedido.</h2>
+      <div class="about-list">
+        <div>
+          <h3>A carne</h3>
+          <p>Blend suculento grelhado na chapa bem quente, com casquinha por fora e ponto certo por dentro.</p>
+        </div>
+        <div>
+          <h3>O pão</h3>
+          <p>Pão macio tostado na manteiga, que segura o hambúrguer até a última mordida.</p>
+        </div>
+        <div>
+          <h3>Os molhos</h3>
+          <p>Maionese defumada, barbecue e molho da casa, preparados com receita própria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="feedback" class="fb" aria-labelledby="t-feedback">
+    <div class="wrap">
+      <div class="fb-intro">
+        <h2 id="t-feedback">Diga o que podemos melhorar</h2>
+        <p>Leva menos de um minuto. Sua opinião ajuda a gente a acertar mais no próximo pedido.</p>
+        <p class="fine">Nome e contato são opcionais.</p>
+      </div>
+
+      <div class="fb-card">
+        <form id="fbForm" novalidate>
+          <fieldset class="field">
+            <legend>Qual nota você dá para a sua experiência?</legend>
+            <div class="rate" id="rate" role="radiogroup" aria-label="Nota de 1 a 5 hambúrgueres"></div>
+            <p class="rate-label" id="rateLabel" aria-live="polite">Toque em um hambúrguer para dar a nota.</p>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend>O que podemos melhorar? <span class="opt">Marque quantos quiser</span></legend>
+            <div class="chips" id="chips"></div>
+          </fieldset>
+
+          <div class="field">
+            <label for="fbText">Conte com suas palavras</label>
+            <textarea id="fbText" rows="4" placeholder="Ex.: o pão chegou frio, gostaria de mais opções vegetarianas..."></textarea>
+          </div>
+
+          <div class="two">
+            <div class="field">
+              <label for="fbName">Seu nome <span class="opt">Opcional</span></label>
+              <input id="fbName" type="text" autocomplete="given-name">
+            </div>
+            <div class="field">
+              <label for="fbContact">WhatsApp ou e-mail <span class="opt">Opcional</span></label>
+              <input id="fbContact" type="text" autocomplete="off" placeholder="Se quiser uma resposta">
+            </div>
+          </div>
+
+          <p class="err" id="fbErr" role="alert" hidden></p>
+
+          <div class="submit-row">
+            <button class="btn btn-primary" type="submit">Enviar feedback</button>
+          </div>
+        </form>
+
+        <div class="done" id="fbDone" tabindex="-1" hidden>
+          <h3>Feedback enviado</h3>
+          <p id="fbThanks"></p>
+          <div class="done-actions">
+            <a class="btn btn-primary" id="fbWa" target="_blank" rel="noopener" hidden>Enviar também pelo WhatsApp</a>
+            <button class="btn" id="fbAgain" type="button">Enviar outro feedback</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="foot-logo">Welbert Burguer</p>
+      <p>Hambúrguer artesanal, feito na chapa.</p>
+    </div>
+    <div>
+      <h3>Horário</h3>
+      <p>Terça a domingo<br>18h às 23h</p>
+    </div>
+    <div>
+      <h3>Como pedir</h3>
+      <p>Delivery ou retirada no balcão.</p>
+      <a class="btn" id="waBtn" target="_blank" rel="noopener" hidden>Pedir pelo WhatsApp</a>
+    </div>
+    <div>
+      <h3>Navegue</h3>
+      <ul>
+        <li><a href="#cardapio">Cardápio</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="copy">© 2026 Welbert Burguer. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+(function () {
+  // Configuração: coloque o número do WhatsApp com DDI e DDD, só números. Ex.: "5511999999999"
+  var CONFIG = { whatsapp: "" };
+
+  var MENU = [
+    { id: "burgers", label: "Hambúrgueres", items: [
+      ["Welbert Clássico", "Blend de 160 g, queijo prato, alface, tomate e molho da casa no pão brioche.", "R$ 28,90"],
+      ["Duplo Cheddar", "Dois smash burgers, cheddar de sobra, cebola caramelizada e picles.", "R$ 36,90"],
+      ["Bacon Crocante", "Blend de 160 g, bacon crocante, cheddar cremoso e maionese defumada.", "R$ 34,90"],
+      ["Costela BBQ", "Costela desfiada, cebola crispy, queijo prato e molho barbecue.", "R$ 39,90"],
+      ["Smash Simples", "Um smash burger, queijo prato, picles e molho especial.", "R$ 22,90"]
+    ]},
+    { id: "frango", label: "Frango e veggie", items: [
+      ["Frango Crocante", "Filé de frango empanado, alface, tomate e maionese de ervas.", "R$ 29,90"],
+      ["Veggie Grão-de-bico", "Hambúrguer de grão-de-bico, rúcula, tomate seco e maionese vegana.", "R$ 31,90"]
+    ]},
+    { id: "porcoes", label: "Porções", items: [
+      ["Batata frita", "Porção crocante para dividir, com sal na medida.", "R$ 18,90"],
+      ["Batata cheddar e bacon", "Batata frita coberta com cheddar cremoso e bacon em cubos.", "R$ 27,90"],
+      ["Onion rings", "Anéis de cebola empanados, servidos com molho barbecue.", "R$ 22,90"],
+      ["Mandioca frita", "Mandioca dourada por fora e macia por dentro.", "R$ 19,90"]
+    ]},
+    { id: "bebidas", label: "Bebidas", items: [
+      ["Refrigerante lata", "350 ml, gelado.", "R$ 6,50"],
+      ["Suco natural", "Laranja, limão ou maracujá.", "R$ 9,90"],
+      ["Milkshake", "Chocolate, morango ou doce de leite.", "R$ 18,90"],
+      ["Água sem gás", "500 ml.", "R$ 4,00"]
+    ]}
+  ];
+
+  var TOPICS = ["Sabor", "Tempo de espera", "Atendimento", "Preço", "Embalagem e delivery", "Variedade do cardápio", "Ambiente e limpeza", "Outro"];
+  var RATE_LABELS = ["Ruim", "Regular", "Bom", "Muito bom", "Excelente"];
+  var STORE_KEY = "welbert_feedback";
+
+  /* Hambúrguer do hero */
+  var art = document.getElementById("art");
+  art.addEventListener("click", function () {
+    var open = art.classList.toggle("open");
+    art.setAttribute("aria-pressed", String(open));
+  });
+
+  /* Cardápio */
+  var tabsEl = document.getElementById("tabs");
+  var itemsEl = document.getElementById("items");
+  var tabButtons = [];
+
+  function showCategory(id) {
+    tabButtons.forEach(function (b) {
+      b.setAttribute("aria-selected", String(b.dataset.id === id));
+      b.tabIndex = b.dataset.id === id ? 0 : -1;
+    });
+    var cat = MENU.filter(function (c) { return c.id === id; })[0];
+    itemsEl.setAttribute("aria-labelledby", "tab-" + id);
+    itemsEl.innerHTML = "";
+    cat.items.forEach(function (it) {
+      var art = document.createElement("article");
+      art.className = "item";
+      var row = document.createElement("div");
+      row.className = "row";
+      var h = document.createElement("h3"); h.textContent = it[0];
+      var lead = document.createElement("span"); lead.className = "leader"; lead.setAttribute("aria-hidden", "true");
+      var pr = document.createElement("span"); pr.className = "price"; pr.textContent = it[2];
+      row.appendChild(h); row.appendChild(lead); row.appendChild(pr);
+      var p = document.createElement("p"); p.textContent = it[1];
+      art.appendChild(row); art.appendChild(p);
+      itemsEl.appendChild(art);
+    });
+  }
+
+  MENU.forEach(function (c, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "tab";
+    b.id = "tab-" + c.id;
+    b.dataset.id = c.id;
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-controls", "items");
+    b.textContent = c.label;
+    b.addEventListener("click", function () { showCategory(c.id); });
+    b.addEventListener("keydown", function (e) {
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + MENU.length) % MENU.length;
+      tabButtons[n].focus();
+      showCategory(MENU[n].id);
+    });
+    tabsEl.appendChild(b);
+    tabButtons.push(b);
+  });
+  showCategory(MENU[0].id);
+
+  /* Feedback: nota */
+  var rateEl = document.getElementById("rate");
+  var rateLabel = document.getElementById("rateLabel");
+  var rating = 0;
+  var stars = [];
+
+  function burgerIcon() {
+    return '<svg viewBox="0 0 44 40" aria-hidden="true" focusable="false">' +
+      '<path class="t" d="M5 18 C5 8 13 3 22 3 C31 3 39 8 39 18 Z"/>' +
+      '<rect class="p" x="3" y="21" width="38" height="6" rx="3"/>' +
+      '<path class="b" d="M5 30 H39 Q39 37 32 37 H12 Q5 37 5 30 Z"/></svg>';
+  }
+
+  function setRating(v) {
+    rating = v;
+    stars.forEach(function (s, i) {
+      s.classList.toggle("on", i < v);
+      s.setAttribute("aria-checked", String(i + 1 === v));
+    });
+    rateLabel.textContent = v ? v + " de 5: " + RATE_LABELS[v - 1] : "Toque em um hambúrguer para dar a nota.";
+  }
+
+  RATE_LABELS.forEach(function (label, i) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "star";
+    b.setAttribute("role", "radio");
+    b.setAttribute("aria-checked", "false");
+    b.setAttribute("aria-label", (i + 1) + " de 5, " + label);
+    b.innerHTML = burgerIcon();
+    b.addEventListener("click", function () { setRating(i + 1); });
+    b.addEventListener("keydown", function (e) {
+      var d = (e.key === "ArrowRight" || e.key === "ArrowUp") ? 1 : (e.key === "ArrowLeft" || e.key === "ArrowDown") ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = Math.min(5, Math.max(1, (rating || i + 1) + d));
+      setRating(n);
+      stars[n - 1].focus();
+    });
+    rateEl.appendChild(b);
+    stars.push(b);
+  });
+
+  /* Feedback: pontos a melhorar */
+  var chipsEl = document.getElementById("chips");
+  TOPICS.forEach(function (t) {
+    var l = document.createElement("label");
+    l.className = "chip";
+    var i = document.createElement("input");
+    i.type = "checkbox"; i.name = "topic"; i.value = t;
+    var s = document.createElement("span"); s.textContent = t;
+    l.appendChild(i); l.appendChild(s);
+    chipsEl.appendChild(l);
+  });
+
+  /* Feedback: envio */
+  var form = document.getElementById("fbForm");
+  var errEl = document.getElementById("fbErr");
+  var doneEl = document.getElementById("fbDone");
+  var thanksEl = document.getElementById("fbThanks");
+  var waLink = document.getElementById("fbWa");
+
+  function showErr(msg) { errEl.textContent = msg; errEl.hidden = false; }
+
+  function saveLocal(entry) {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      var arr = raw ? JSON.parse(raw) : [];
+      arr.push(entry);
+      localStorage.setItem(STORE_KEY, JSON.stringify(arr));
+    } catch (e) { /* armazenamento indisponível: segue sem salvar */ }
+  }
+
+  function waUrl(text) {
+    return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text);
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    errEl.hidden = true;
+    var topics = Array.prototype.slice.call(form.querySelectorAll("input[name=topic]:checked")).map(function (i) { return i.value; });
+    var text = document.getElementById("fbText").value.trim();
+    var name = document.getElementById("fbName").value.trim();
+    var contact = document.getElementById("fbContact").value.trim();
+
+    if (!rating) { showErr("Escolha uma nota de 1 a 5 hambúrgueres."); return; }
+    if (!topics.length && !text) { showErr("Marque um ponto a melhorar ou escreva sua sugestão."); return; }
+
+    saveLocal({ date: new Date().toISOString(), rating: rating, topics: topics, text: text, name: name, contact: contact });
+
+    thanksEl.textContent = "Obrigado" + (name ? ", " + name : "") + ". Sua opinião ajuda a melhorar o próximo hambúrguer.";
+
+    if (CONFIG.whatsapp) {
+      var lines = ["Feedback Welbert Burguer", "Nota: " + rating + " de 5 (" + RATE_LABELS[rating - 1] + ")"];
+      if (topics.length) lines.push("Pode melhorar: " + topics.join(", "));
+      if (text) lines.push("Comentário: " + text);
+      if (name) lines.push("Nome: " + name);
+      if (contact) lines.push("Contato: " + contact);
+      waLink.href = waUrl(lines.join("\n"));
+      waLink.hidden = false;
+    } else {
+      waLink.hidden = true;
+    }
+
+    form.hidden = true;
+    doneEl.hidden = false;
+    doneEl.focus();
+  });
+
+  document.getElementById("fbAgain").addEventListener("click", function () {
+    form.reset();
+    setRating(0);
+    errEl.hidden = true;
+    doneEl.hidden = true;
+    form.hidden = false;
+    stars[0].focus();
+  });
+
+  /* WhatsApp no rodapé */
+  if (CONFIG.whatsapp) {
+    var wa = document.getElementById("waBtn");
+    wa.href = waUrl("Olá! Quero fazer um pedido na Welbert Burguer.");
+    wa.hidden = false;
+  }
+})();
+</script>
+</body>
+</html>
